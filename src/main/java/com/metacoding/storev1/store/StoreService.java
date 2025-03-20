@@ -23,4 +23,8 @@ public class StoreService {
         List<Store> storeList = storeRepository.findAll();
         return storeList;
     }
+
+    public Store 상품상세보기(int id) {
+        return storeRepository.findById(id);
+    }
 }
