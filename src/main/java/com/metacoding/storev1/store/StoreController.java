@@ -38,12 +38,14 @@ public class StoreController {
         return "store/detail";
     }
 
+    // TODO #4 업데이트 화면을 요청, id에 해당하는 데이터 출력
     @GetMapping("/store/{id}/update-form")
-    public String updateForm(@PathVariable("id") int id) {
+    public String updateForm(@PathVariable("id") int id, HttpServletRequest request) {
+        Store store = storeService.상품상세보기(id);
+        request.setAttribute("model", store);
         return "store/update-form";
     }
 
-    // TODO #2 요청데이터에서 무엇을 사용해서 삭제를 할까
     @PostMapping("/store/{id}/delete")
     public String delete(@PathVariable("id") int id) {
         storeService.상품삭제(id);
@@ -53,16 +55,16 @@ public class StoreController {
     @PostMapping("/store/save")
     public String save(@RequestParam("name") String name, @RequestParam("stock") int stock,
             @RequestParam("price") int price) {
-        System.out.println("name : " + name);
-        System.out.println("stock : " + stock);
-        System.out.println("price : " + price);
         storeService.상품등록(name, stock, price);
         return "redirect:/";
     }
 
+    // TODO #2 id, name, stock, price를 받아 업데이트 요청
     @PostMapping("/store/{id}/update")
-    public String update(@PathVariable("id") int id) {
-        return "redirect:/store/1";
+    public String update(@PathVariable("id") int id, @RequestParam("name") String name,
+            @RequestParam("stock") int stock, @RequestParam("price") int price) {
+        storeService.상품업데이트(id, name, stock, price);
+        return "redirect:/store/" + id;
     }
 
 }

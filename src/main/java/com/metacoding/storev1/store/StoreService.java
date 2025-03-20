@@ -28,15 +28,27 @@ public class StoreService {
         return storeRepository.findById(id);
     }
 
-    // TODO #3 싱픔삭제 로직 작성
     @Transactional
     public void 상품삭제(int id) {
         Store store = storeRepository.findById(id);
 
         if (store == null)
-            throw new RuntimeException("해당 id에 대한 테이블이 없습니다");
+            throw new RuntimeException("해당 id의 데이터가 없습니다");
         else
             storeRepository.deleteById(id);
+    }
+
+    // TODO #3 상품데이터 업데이트 로직
+    @Transactional
+    public void 상품업데이트(int id, String name, int stock, int price) {
+        // 1. 해당 상품 있는지 확인
+        Store store = storeRepository.findById(id);
+
+        // 2. 있으면 업데이트 없으면 에러
+        if (store == null)
+            throw new RuntimeException("해당 id의 데이터가 없습니다");
+        else
+            storeRepository.updateById(id, name, stock, price);
     }
 
 }

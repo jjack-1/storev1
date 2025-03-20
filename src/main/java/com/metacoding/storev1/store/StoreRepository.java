@@ -39,10 +39,19 @@ public class StoreRepository {
         return (Store) query.getSingleResult();
     }
 
-    // TODO #1 삭제 쿼리문 작성
     public void deleteById(int id) {
         Query query = em.createNativeQuery("delete from store_tb where id = ?", Store.class);
         query.setParameter(1, id);
+        query.executeUpdate();
+    }
+
+    // TODO #1 id를 기준으로 업데이트 쿼리 작성
+    public void updateById(int id, String name, int stock, int price) {
+        Query query = em.createNativeQuery("update store_tb set name = ?, stock = ?, price = ? where id = ?");
+        query.setParameter(1, name);
+        query.setParameter(2, stock);
+        query.setParameter(3, price);
+        query.setParameter(4, id);
         query.executeUpdate();
     }
 }
