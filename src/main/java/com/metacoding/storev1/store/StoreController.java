@@ -43,8 +43,10 @@ public class StoreController {
         return "store/update-form";
     }
 
+    // TODO #2 요청데이터에서 무엇을 사용해서 삭제를 할까
     @PostMapping("/store/{id}/delete")
     public String delete(@PathVariable("id") int id) {
+        storeService.상품삭제(id);
         return "redirect:/";
     }
 

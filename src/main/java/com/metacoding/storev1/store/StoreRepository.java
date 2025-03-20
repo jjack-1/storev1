@@ -38,4 +38,11 @@ public class StoreRepository {
         query.setParameter(1, id);
         return (Store) query.getSingleResult();
     }
+
+    // TODO #1 삭제 쿼리문 작성
+    public void deleteById(int id) {
+        Query query = em.createNativeQuery("delete from store_tb where id = ?", Store.class);
+        query.setParameter(1, id);
+        query.executeUpdate();
+    }
 }

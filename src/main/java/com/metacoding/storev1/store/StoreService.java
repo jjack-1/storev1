@@ -27,4 +27,16 @@ public class StoreService {
     public Store 상품상세보기(int id) {
         return storeRepository.findById(id);
     }
+
+    // TODO #3 싱픔삭제 로직 작성
+    @Transactional
+    public void 상품삭제(int id) {
+        Store store = storeRepository.findById(id);
+
+        if (store == null)
+            throw new RuntimeException("해당 id에 대한 테이블이 없습니다");
+        else
+            storeRepository.deleteById(id);
+    }
+
 }
