@@ -18,7 +18,7 @@ public class Log {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer storeId; // 상품 ID (FK)
-    private String qty; // 구매 개수
+    private Integer qty; // 구매 개수
     private Integer totalPrice; // qty * store(price)
     private String buyer; // 구매자 이름
 }

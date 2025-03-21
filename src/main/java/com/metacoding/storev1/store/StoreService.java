@@ -25,30 +25,30 @@ public class StoreService {
     }
 
     public Store 상품상세보기(int id) {
-        return storeRepository.findById(id);
+        try {
+            return storeRepository.findById(id);
+        } catch (Exception e) {
+            throw new RuntimeException("해당 상품이 없어 상세보기가 불가합니다");
+        }
     }
 
     @Transactional
     public void 상품삭제(int id) {
-        Store store = storeRepository.findById(id);
-
-        if (store == null)
-            throw new RuntimeException("해당 id의 데이터가 없습니다");
-        else
+        try {
+            storeRepository.findById(id);
             storeRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new RuntimeException("해당 상품이 없어 삭제가 불가합니다");
+        }
     }
 
-    // TODO #3 상품데이터 업데이트 로직
     @Transactional
     public void 상품업데이트(int id, String name, int stock, int price) {
-        // 1. 해당 상품 있는지 확인
-        Store store = storeRepository.findById(id);
-
-        // 2. 있으면 업데이트 없으면 에러
-        if (store == null)
-            throw new RuntimeException("해당 id의 데이터가 없습니다");
-        else
+        try {
+            storeRepository.findById(id);
             storeRepository.updateById(id, name, stock, price);
+        } catch (Exception e) {
+            throw new RuntimeException("해당 상품이 없어 업데이트가 불가합니다");
+        }
     }
-
 }
