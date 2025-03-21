@@ -38,7 +38,6 @@ public class StoreController {
         return "store/detail";
     }
 
-    // TODO #4 업데이트 화면을 요청, id에 해당하는 데이터 출력
     @GetMapping("/store/{id}/update-form")
     public String updateForm(@PathVariable("id") int id, HttpServletRequest request) {
         Store store = storeService.상품상세보기(id);
@@ -53,16 +52,19 @@ public class StoreController {
     }
 
     @PostMapping("/store/save")
-    public String save(@RequestParam("name") String name, @RequestParam("stock") int stock,
+    public String save(
+            @RequestParam("name") String name,
+            @RequestParam("stock") int stock,
             @RequestParam("price") int price) {
         storeService.상품등록(name, stock, price);
         return "redirect:/";
     }
 
-    // TODO #2 id, name, stock, price를 받아 업데이트 요청
     @PostMapping("/store/{id}/update")
-    public String update(@PathVariable("id") int id, @RequestParam("name") String name,
-            @RequestParam("stock") int stock, @RequestParam("price") int price) {
+    public String update(@PathVariable("id") int id,
+            @RequestParam("name") String name,
+            @RequestParam("stock") int stock,
+            @RequestParam("price") int price) {
         storeService.상품업데이트(id, name, stock, price);
         return "redirect:/store/" + id;
     }
