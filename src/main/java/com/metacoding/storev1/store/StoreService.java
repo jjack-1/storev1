@@ -25,11 +25,11 @@ public class StoreService {
     }
 
     public Store 상품상세보기(int id) {
-        try {
-            return storeRepository.findById(id);
-        } catch (Exception e) {
-            throw new RuntimeException("해당 상품이 없어 상세보기가 불가합니다");
-        }
+        return storeRepository.findById(id);
+        // try {
+        // } catch (Exception e) {
+        // throw new RuntimeException("해당 상품이 없어 상세보기가 불가합니다");
+        // }
     }
 
     @Transactional

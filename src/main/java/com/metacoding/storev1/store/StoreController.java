@@ -56,7 +56,7 @@ public class StoreController {
             @RequestParam("name") String name,
             @RequestParam("stock") int stock,
             @RequestParam("price") int price) {
-        storeService.상품등록(name, stock, price);
+        // storeService.상품등록(name, stock, price);
         return "redirect:/";
     }
 
